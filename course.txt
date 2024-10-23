@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1.2s ease-out;
+        }
+        
+        /* Description */
+        p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        /* Video */
+        video {
+            display: block;
+            margin: 0 auto 20px;
+            width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            animation: fadeInUp 1.3s ease-out;
+        }
+
+        /* Certificate Button */
+        #certificate-btn {
+            display: none; /* Initially hidden */
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        #certificate-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Go Back Button */
+        #go-back-btn {
+            display: none; /* Initially hidden */
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            color: white;
+            background-color: #dc3545; /* Red color for go back button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        #go-back-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Name Input Section */
+        .name-input {
+            display: none;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .name-input input {
+            padding: 10px;
+            font-size: 1.1rem;
+            width: 80%;
+            max-width: 400px;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease;
+        }
+
+        .name-input input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .name-input button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .name-input button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            .name-input input {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Course Title: Disaster Management 101</h1>
+        <p>Watch the full video to unlock your certificate.</p>
+        <video id="course-video" width="600" height="400" controls playsinline>
+            <source src="/images/disaster preparedness.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="name-input" id="name-input">
+            <input type="text" id="user-name" placeholder="Enter your name" />
+            <button onclick="generateCertificate()">Generate Certificate</button>
+        </div>
+
+        <button id="certificate-btn" onclick="showNameInput()">Download Certificate</button>
+        <button id="go-back-btn" onclick="goBack()">Go Back</button> <!-- Go Back Button -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const video = document.getElementById('course-video');
+        const certificateBtn = document.getElementById('certificate-btn');
+        const goBackBtn = document.getElementById('go-back-btn'); // Go Back Button
+        const nameInputDiv = document.getElementById('name-input');
+        
+        // Flag to check if the certificate has been generated
+        let certificateGenerated = false;
+
+        // Show the name input field when the user clicks the certificate button
+        function showNameInput() {
+            nameInputDiv.style.display = 'block';
+            certificateBtn.style.display = 'none';
+            goBackBtn.style.display = 'inline-block'; // Show go back button when generating certificate
+        }
+
+        // Display the certificate button and go back button when the video finishes
+        video.onended = function() {
+            certificateBtn.style.display = 'inline-block'; // Show the button when video ends
+            goBackBtn.style.display = 'inline-block'; // Show Go Back button when video ends
+        };
+
+        // Function to generate the certificate
+        function generateCertificate() {
+            if (certificateGenerated) {
+                alert('You have already generated your certificate.');
+                return; // Exit if certificate is already generated
+            }
+
+            const userName = document.getElementById('user-name').value;
+
+            if (userName.trim() === '') {
+                alert('Please enter your name to generate the certificate.');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Load the certificate template image
+            const img = new Image();
+            img.src = '/images/certificate.png';  // Replace with the path to your certificate template image
+
+            img.onload = function() {
+                // Draw the certificate template on the PDF
+                doc.addImage(img, 'JPEG', 0, 0, 210, 297);  // Adjust width (210) and height (297) for A4 size
+
+                // Add the user's name on top of the template
+                doc.setFontSize(24);
+                doc.setTextColor(50, 50, 50);
+                doc.text(userName, 105, 150, null, null, 'center');  // Adjust position to match where the name should go
+
+                // Save the PDF
+                doc.save('Certificate-' + userName + '.pdf');
+
+                // Set the flag to true to prevent further downloads
+                certificateGenerated = true;
+            };
+        }
+
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back(); // Go back to the previous page
+        }
+    </script>
+</body>
+</html>
