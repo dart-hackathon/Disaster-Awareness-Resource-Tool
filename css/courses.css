@@ -226,3 +226,43 @@ h2 {
         transform: translateX(0);
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+      background-color: #121212; /* Dark theme background */
+      color: #e0e0e0; /* Dark theme text color */
+    }
+  
+    .navbar {
+      background: linear-gradient(90deg, #1f1f1f, #2a2a2a); /* Dark navbar */
+    }
+  
+    .navbar ul li a {
+      color: #e0e0e0; /* Light text color for links */
+    }
+  
+    .navbar ul li a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+  
+    footer {
+      background-color: #1f1f1f; /* Dark footer */
+    }
+  
+    .social-icons a {
+      color: #fff; /* Social icons color */
+    }
+  
+    .social-icons a:hover {
+      color: #007BFF; /* Social icons hover color */
+    }
+    
+    /* Navbar on mobile in dark mode */
+    @media (max-width: 768px) {
+      .navbar ul {
+        background-color: rgba(255, 255, 255, 0.1); /* Mobile navbar background in dark mode */
+      }
+    }
+  }
+  
