@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DART</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/disasters.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>DART</h1>
+            <div class="hamburger">&#9776;</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disasters.html">Disasters</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="disasters" class="section">
+        <div class="container">
+            <h2>Ongoing Disasters in India</h2>
+            
+            <!-- Marquee for Ongoing Disasters -->
+            <div class="marquee-container">
+                <marquee behavior="scroll" direction="left" scrollamount="6">
+                    <span class="disaster-marquee">
+                        Monsoon Flooding in Kerala - Severe flooding in multiple districts | 
+                        Earthquake in Uttarakhand - 6.8 magnitude felt in several states | 
+                        Cyclone Jawad impacting Odisha - High winds and heavy rain expected | 
+                        Landslides in Himachal Pradesh - Safety measures for affected areas | 
+                        Drought conditions in Rajasthan - Water conservation tips | 
+                        Severe Heatwave in Maharashtra - Precautions to take during extreme temperatures | 
+                        Air Quality Crisis in Delhi - Stay indoors and use air purifiers | 
+                        Forest Fires in Uttarakhand - Evacuate if in nearby areas
+                    </span>
+                </marquee>
+            </div>
+
+            <div class="disaster-grid">
+                <!-- Quick Survival Guide for each disaster -->
+                <div class="disaster-item">
+                    <img src="/images/flood.png" alt="" width="100px" height="auto">
+                    <h3>Monsoon Flooding in Kerala</h3>
+                    <p><strong>Survival Tip:</strong> Move to higher ground and stay informed about the latest warnings.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/earthquake.png" alt="" width="100px" height="auto">
+                    <h3>Earthquake in Uttarakhand</h3>
+                    <p><strong>Survival Tip:</strong> Drop, Cover, and Hold On during the quake; check for injuries afterward.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/tornado.png" alt="" width="100px" height="auto">
+                    <h3>Cyclone Jawad</h3>
+                    <p><strong>Survival Tip:</strong> Evacuate if instructed and prepare for possible power outages.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/landslide.png" alt="" width="100px" height="auto">
+                    <h3>Landslides in Himachal Pradesh</h3>
+                    <p><strong>Survival Tip:</strong> Avoid traveling in affected areas; keep emergency supplies handy.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/drought.png" alt="" width="100px" height="auto">
+                    <h3>Drought Conditions in Rajasthan</h3>
+                    <p><strong>Survival Tip:</strong> Conserve water and follow local guidelines for water use.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/heat-wave.png" alt="" width="100px" height="auto">
+                    <h3>Severe Heatwave in Maharashtra</h3>
+                    <p><strong>Survival Tip:</strong> Stay hydrated, avoid outdoor activities during peak heat, and use fans or AC.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/car.png" alt="" width="100px" height="auto">
+                    <h3>Air Quality Crisis in Delhi</h3>
+                    <p><strong>Survival Tip:</strong> Limit outdoor exposure, wear masks, and use air purifiers indoors.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/wildfire.png" alt="" width="100px" height="auto">
+                    <h3>Forest Fires in Uttarakhand</h3>
+                    <p><strong>Survival Tip:</strong> Evacuate if you are in the vicinity and avoid smoke inhalation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Disaster Analysis and Response Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+      
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+        });
+      </script>
+      
+</body>
+</html>

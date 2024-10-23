@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DART</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/courses.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1>DART</h1>
+            <div class="hamburger">&#9776;</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disasters.html">Disasters</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="courses" class="section">
+        <div class="container">
+            <h2>Our Courses</h2>
+
+            <!-- Featured Course Section -->
+            <div class="featured-course">
+                <div class="featured-content">
+                    <h3>Featured Course: Disaster Preparedness 101</h3>
+                    <p>This course is designed to help you understand the basics of disaster preparedness, including making emergency kits, creating family evacuation plans, and staying informed during emergencies.</p>
+                    <a href="/courses/inst1.html" class="cta-btn">Enroll Now</a>
+                </div>
+                <div class="featured-image">
+                    <img src="/images/Courses.webp" alt="Disaster Preparedness Course">
+                </div>
+            </div>
+
+            <!-- Grid for Additional Courses -->
+            <div class="course-grid">
+                <div class="course-item">
+                    <h3>First Aid & Emergency Response</h3>
+                    <p>Learn critical first aid techniques to handle emergencies before professional help arrives.</p>
+                    <a href="#" class="btn-secondary">Learn More</a>
+                </div>
+                <div class="course-item">
+                    <h3>Community Disaster Resilience</h3>
+                    <p>Explore how communities can prepare together for natural disasters and mitigate risks effectively.</p>
+                    <a href="#" class="btn-secondary">Learn More</a>
+                </div>
+                <div class="course-item">
+                    <h3>Fire Safety Awareness</h3>
+                    <p>Understand fire hazards, fire prevention methods, and how to safely evacuate during a fire.</p>
+                    <a href="#" class="btn-secondary">Learn More</a>
+                </div>
+                <div class="course-item">
+                    <h3>Psychological First Aid</h3>
+                    <p>Learn how to support individuals experiencing trauma or shock after a disaster strikes.</p>
+                    <a href="#" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Disaster Analysis and Response Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+      
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+        });
+      </script>
+      
+</body>
+</html>
