@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         techOrder: ['youtube'],
         sources: [{
             type: 'video/youtube',
-            src: 'https://www.youtube.com/watch?v=_6ri7oZ6-k4'
+            src: 'https://www.youtube.com/watch?v=E5wLV3Hl1Xc&t=131s'
         }]
     });
 
@@ -180,7 +180,7 @@ function generateCertificate() {
         doc.text(userName, 148.5, 105, { align: 'center' }); // Adjust coordinates as needed
 
                 // Save the PDF
-                doc.save('Disaster Managament: Disaster Awareness Certificate.pdf');
+                doc.save('Disaster Management: Earthquake Certificate.pdf');
 
                 // Hide name input after generating certificate
                 nameInputDiv.style.display = 'none';
@@ -192,8 +192,8 @@ function generateCertificate() {
             };
         }
         
-        function goToSecondCourse() {
-            window .location.href = 'course2.html';
+        function goToThirdCourse() {
+            window .location.href = 'course3.html';
         }
         
         function closeNextCourseModal() {
