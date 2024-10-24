@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Observe all emergency cards for scroll animations
     document.querySelectorAll('.emergency-card').forEach(card => {
-        observer.observe(card);
+ observer.observe(card);
     });
 
     // Hover effect for steps
@@ -50,89 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Accordion functionality
-    const headers = document.querySelectorAll('.accordion-header');
-    headers.forEach(header => {
-        header.addEventListener('click', () => {
-            const body = header.nextElementSibling;
-            body.style.display = body.style.display === 'block' ? 'none' : 'block';
-        });
+    // Initialize Video.js players
+    var players = document.querySelectorAll('.video-js');
+    players.forEach(function(player) {
+        videojs(player.id);
     });
-
-    // Quiz functionality
-    const quizButton = document.getElementById('start-quiz');
-    const quizContainer = document.getElementById('quiz-container');
-    const quizQuestion = document.getElementById('quiz-question');
-    const quizOptions = document.getElementById('quiz-options');
-    const nextButton = document.getElementById('next-question');
-    const quizResults = document.getElementById('quiz-results');
-    const scoreDisplay = document.getElementById('score');
-    const restartButton = document.getElementById('restart-quiz');
-
-    const questions = [
-        {
-            question: "What should you do first in a cardiac arrest?",
-            options: ["Start CPR", "Call 112", "Check for breathing"],
-            answer: "Call 112"
-        },
-        {
-            question: "How long should you cool a burn under running water?",
-            options: ["5 minutes", "10 minutes", "15 minutes"],
-            answer: "10 minutes"
-        }
-    ];
-
-    let currentQuestionIndex = 0;
-    let score = 0;
-
-    quizButton.addEventListener('click', startQuiz);
-    nextButton.addEventListener('click', () => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            showQuestion();
-        } else {
-            showResults();
-        }
-    });
-    restartButton.addEventListener('click', restartQuiz);
-
-    function startQuiz() {
-        quizContainer.classList.remove('hidden');
-        quizButton.classList.add('hidden');
-        showQuestion();
-    }
-
-    function showQuestion() {
-        const question = questions[currentQuestionIndex];
-        quizQuestion.innerText = question.question;
-        quizOptions.innerHTML = '';
-        question.options.forEach(option => {
-            const button = document.createElement('button');
-            button.innerText = option;
-            button.onclick = () => checkAnswer(option);
-            quizOptions.appendChild(button);
-        });
-        nextButton.classList.add('hidden');
-    }
-
-    function checkAnswer(selectedOption) {
-        const correctAnswer = questions[currentQuestionIndex].answer;
-        if (selectedOption === correctAnswer) {
-            score++;
-        }
-        nextButton.classList.remove('hidden');
-    }
-
-    function showResults() {
-        quizContainer.classList.add('hidden');
-        quizResults.classList.remove('hidden');
-        scoreDisplay.innerText = `You scored ${score} out of ${questions.length}!`;
-    }
-
-    function restartQuiz() {
-        currentQuestionIndex = 0;
-        score = 0;
-        quizResults.classList.add('hidden');
-        quizButton.classList.remove('hidden');
-    }
 });
