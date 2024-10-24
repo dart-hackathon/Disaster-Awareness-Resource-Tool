@@ -27,7 +27,8 @@
         <div class="container">
             <h2>Contact Us</h2>
             <p>If you have any questions, comments, or suggestions, feel free to reach out to us. Your feedback is valuable in helping us improve our resources and services.</p>
-            <form action="#" method="post" class="contact-form">
+            <form id="contact-form" class="contact-form">
+                <input type="hidden" name="contact_number">
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
@@ -55,6 +56,31 @@
             </div>
         </div>
     </footer>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('oZV7Qtubfwge3XVhA');
+        })();
+
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                this.contact_number.value = Math.random() * 100000 | 0;
+                
+                emailjs.sendForm('service_86at31g', 'template_6shahsc', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                        alert('Message sent successfully!');
+                        document.getElementById('contact-form').reset();
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                        alert('Failed to send message. Please try again.');
+                    });
+            });
+        }
+    </script>
 
     <script>
         const hamburger = document.querySelector('.hamburger');

@@ -92,7 +92,7 @@ function handleVideoError() {
 }
 
 function submitQuiz() {
-    const answers = ['b', 'd', 'b', 'a', 'c', 'c', 'c', 'b', 'a', 'd'];
+    const answers = ['a', 'c', 'b', 'c', 'b', 'b', 'd', 'c', 'a', 'a'];
     let score = 0;
     let allQuestionsAnswered = true;
 

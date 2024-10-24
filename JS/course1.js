@@ -92,7 +92,7 @@ function handleVideoError() {
 }
 
 function submitQuiz() {
-    const answers = ['b', 'd', 'b', 'a', 'c', 'c', 'c', 'b', 'a', 'd'];
+    const answers = ['b', 'd', 'b', 'c', 'c', 'c', 'b', 'b', 'c', 'a'];
     let score = 0;
     let allQuestionsAnswered = true;
 
@@ -167,7 +167,7 @@ function generateCertificate() {
 
     // Load the certificate template
     const img = new Image();
-    img.src = '/images/certificate.png';
+    img.src = '/images/course1.png';
     
     img.onload = function() {
         // Add the certificate template as background
