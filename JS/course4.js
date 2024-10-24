@@ -167,7 +167,7 @@ function generateCertificate() {
 
     // Load the certificate template
     const img = new Image();
-    img.src = '/images/certificate.png';
+    iimg.src = '/images/course1.png';
     
     img.onload = function() {
         // Add the certificate template as background

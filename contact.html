@@ -1,3 +1,4 @@
+<!-- contact.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,8 @@
     <link rel="stylesheet" href="/css/contact.css">
 </head>
 <body>
+
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
             <h1>DART</h1>
@@ -23,6 +26,7 @@
         </div>
     </nav>
 
+    <!-- Loading and Success Popups -->
     <div id="loading-popup" class="popup">
         <p>Please wait, Sending.....</p>
     </div>
@@ -31,6 +35,7 @@
         <p>Thank You for Contacting Us!</p>
     </div>
 
+    <!-- Contact Section -->
     <section id="contact" class="section contact-section">
         <div class="container">
             <h2>Contact Us</h2>
@@ -54,6 +59,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2024 Disaster Analysis and Response Team. All rights reserved.</p>
@@ -65,55 +71,56 @@
         </div>
     </footer>
 
+    <!-- EmailJS Script -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script type="text/javascript">
-    (function() {
-        emailjs.init('oZV7Qtubfwge3XVhA');
-    })();
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('oZV7Qtubfwge3XVhA');
+        })();
 
-    window.onload = function() {
-        const form = document.getElementById('contact-form');
-        const loadingPopup = document.getElementById('loading-popup');
-        const successPopup = document.getElementById('success-popup');
+        window.onload = function() {
+            const form = document.getElementById('contact-form');
+            const loadingPopup = document.getElementById('loading-popup');
+            const successPopup = document.getElementById('success-popup');
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            this.contact_number.value = Math.random() * 100000 | 0;
-            
-            // Show loading popup
-            loadingPopup.style.display = 'block';
-            
-            emailjs.sendForm('service_86at31g', 'template_6shahsc', this)
-                .then(function() {
-                    console.log('SUCCESS!');
-                    // Hide loading popup
-                    loadingPopup.style.display = 'none';
-                    // Show success popup
-                    successPopup.style.display = 'block';
-                    // Hide success popup after 3 seconds
-                    setTimeout(() => {
-                        successPopup.style.display = 'none';
-                    }, 3000);
-                    form.reset();
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    // Hide loading popup
-                    loadingPopup.style.display = 'none';
-                    alert('Failed to send message. Please try again.');
-                });
-        });
-    }
-</script>
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                this.contact_number.value = Math.random() * 100000 | 0; // Random contact number
+                
+                // Show loading popup
+                loadingPopup.style.display = 'block';
+                
+                // Send form using EmailJS
+                emailjs.sendForm('service_86at31g', 'template_6shahsc', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                        loadingPopup.style.display = 'none'; // Hide loading popup
+                        successPopup.style.display = 'block'; // Show success popup
+                        // Hide success popup after 3 seconds
+                        setTimeout(() => {
+                            successPopup.style.display = 'none';
+                        }, 3000);
+                        form.reset(); // Reset the form
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                        loadingPopup.style.display = 'none'; // Hide loading popup
+                        alert('Failed to send message. Please try again.'); // Alert user
+                    });
+            });
+        }
+    </script>
 
+
+    <!-- Hamburger Menu Script -->
     <script>
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.navbar ul');
       
         hamburger.addEventListener('click', () => {
-          navMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-      </script>
+    </script>
       
 </body>
 </html>

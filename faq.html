@@ -1,3 +1,4 @@
+<!-- faq.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,8 @@
     <link rel="stylesheet" href="/css/faq.css">
 </head>
 <body>
+
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
             <h1>DART</h1>
@@ -23,11 +26,12 @@
         </div>
     </nav>
 
+    <!-- FAQ Section -->
     <section id="faq" class="section">
         <div class="container">
             <h2>Frequently Asked Questions</h2>
 
-            <!-- Optional Marquee for Tips or Announcements -->
+            <!-- Marquee for Announcements -->
             <div class="marquee-container">
                 <marquee behavior="scroll" direction="left" scrollamount="6">
                     <span class="faq-marquee">
@@ -36,44 +40,53 @@
                 </marquee>
             </div>
 
+            <!-- FAQ Grid -->
             <div class="faq-grid">
-                <!-- FAQ Items -->
                 <div class="faq-item">
                     <h3>What should I do during an earthquake?</h3>
                     <p>During an earthquake, Drop, Cover, and Hold On until the shaking stops. Stay away from windows and heavy furniture.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>How can I prepare for a hurricane?</h3>
                     <p>Prepare by creating an evacuation plan, stocking up on emergency supplies, and securing your home from potential damage.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>What supplies should be in an emergency kit?</h3>
                     <p>An emergency kit should contain water, food, first aid supplies, flashlights, batteries, and personal hygiene items.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>How do I stay informed during a disaster?</h3>
                     <p>Stay informed by signing up for local emergency alerts, listening to the radio, and monitoring official social media channels.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>What should I do if I am caught in a flood?</h3>
                     <p>Move to higher ground immediately, avoid walking or driving through floodwaters, and seek shelter on higher floors.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>What are the signs of an approaching tsunami?</h3>
                     <p>Signs of a tsunami include rapid water recession from the shore, an unusual roar from the ocean, or an earthquake in the area.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>How can I protect my home from wildfires?</h3>
                     <p>Clear dry vegetation around your property, use fire-resistant building materials, and have an evacuation plan in place.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>What should I include in a family emergency plan?</h3>
                     <p>Include meeting points, communication plans, an emergency contact list, and specific evacuation routes in your plan.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>What do I do if there is a power outage during a disaster?</h3>
                     <p>Use battery-powered lights, avoid candles, conserve phone battery, and listen to emergency updates via radio.</p>
                 </div>
+
                 <div class="faq-item">
                     <h3>How can I help my community during a disaster?</h3>
                     <p>Volunteer at shelters, donate supplies, and help neighbors with preparedness and evacuation, especially the elderly and disabled.</p>
@@ -82,20 +95,22 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Disaster Analysis and Response Team. All rights reserved.</p>
+            <p>&copy; 2024 Disaster Awareness and Resource Tool. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- JavaScript for Mobile Navbar Toggle -->
     <script>
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.navbar ul');
       
         hamburger.addEventListener('click', () => {
-          navMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-      </script>
+    </script>
       
 </body>
 </html>

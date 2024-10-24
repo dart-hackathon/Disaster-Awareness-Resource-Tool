@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         techOrder: ['youtube'],
         sources: [{
             type: 'video/youtube',
-            src: 'https://www.youtube.com/watch?v=_6ri7oZ6-k4'
+            src: 'https://youtu.be/_6ri7oZ6-k4'
         }]
     });
 
@@ -92,7 +92,7 @@ function handleVideoError() {
 }
 
 function submitQuiz() {
-    const answers = ['b', 'd', 'b', 'c', 'c', 'c', 'b', 'b', 'c', 'a'];
+    const answers = ['a', 'c', 'b', 'c', 'b', 'b', 'd', 'c', 'a', 'a'];
     let score = 0;
     let allQuestionsAnswered = true;
 
@@ -180,7 +180,7 @@ function generateCertificate() {
         doc.text(userName, 148.5, 105, { align: 'center' }); // Adjust coordinates as needed
 
                 // Save the PDF
-                doc.save('Disaster Managament: Disaster Awareness Certificate.pdf');
+                doc.save('Disaster Management: Earthquake Certificate.pdf');
 
                 // Hide name input after generating certificate
                 nameInputDiv.style.display = 'none';
