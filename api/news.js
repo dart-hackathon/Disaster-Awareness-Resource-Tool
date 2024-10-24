@@ -1,74 +1,37 @@
-import fetch from 'node-fetch';
+// api/news.js
 
-// Replace with your actual Aylien App ID and Key
-const appId = '2071bb78f';
-const apiKey = 'Y291b62df53cdb1b0a31e2eafbe3b2305';
+import AylienNewsApi from 'aylien-news-api';
 
-// Function to get the OAuth token from Aylien API
-async function getToken() {
-    try {
-        const response = await fetch('https://api.aylien.com/v1/oauth/token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                Authorization: 'Basic ' + btoa('username:password'),
-            },
-            body: new URLSearchParams({
-                grant_type: 'password',
-            }),
-        });
+const defaultClient = AylienNewsApi.ApiClient.instance;
+const app_id = defaultClient.authentications['app_id'];
+const app_key = defaultClient.authentications['app_key'];
 
-        if (!response.ok) {
-            console.error('Failed to fetch token:', response.statusText);
-            return null;
-        }
+// Set your Aylien API credentials here
+app_id.apiKey = process.env.AYLIEN_APP_ID;
+app_key.apiKey = process.env.AYLIEN_API_KEY;
 
-        const data = await response.json();
-        return data.access_token;
-    } catch (error) {
-        console.error('Error fetching token:', error);
-        return null;
-    }
-}
+const api = new AylienNewsApi.DefaultApi();
 
-// Function to fetch news stories from Aylien API
 export default async function handler(req, res) {
-    const token = await getToken();
-    if (!token) {
-        res.status(500).json({ error: 'Failed to authenticate with Aylien API' });
-        return;
-    }
+    if (req.method === 'GET') {
+        let opts = {
+            title: 'disaster',
+            sortBy: 'published_at',
+            language: ['en'],
+            publishedAtStart: 'NOW-7DAYS',
+            publishedAtEnd: 'NOW',
+            perPage: 10
+        };
 
-    // Aylien API query for disaster-related news
-    const url = 'https://api.aylien.com/v6/news/stories?aql=language:(en) AND text:(disasters) AND categories:({{taxonomy:aylien AND id:ay.lifesoc.recontr}} OR {{taxonomy:aylien AND id:ay.lifesoc.fire}} OR {{taxonomy:aylien AND id:ay.lifesoc.evacuate}} OR {{taxonomy:aylien AND id:ay.lifesoc.disater}}) AND entities:({{surface_forms.text:"new delhi" AND overall_prominence:>=0.65}}) AND sentiment.title.polarity:(negative neutral positive)&cursor=*&published_at.end=NOW&published_at.start=NOW-1DAYS/DAY';
-
-    const requestOptions = {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'X-AYLIEN-NewsAPI-Application-ID': appId,
-            'X-AYLIEN-NewsAPI-Application-Key': apiKey,
-        },
-        redirect: 'follow',
-    };
-
-    try {
-        const response = await fetch(url, requestOptions);
-        const result = await response.text();  // Get raw text to inspect
-
-        console.log('Aylien API response:', result);  // Log the raw response
-
-        // Try to parse the response as JSON
         try {
-            const jsonResult = JSON.parse(result);
-            res.status(200).json(jsonResult);
+            const data = await api.listStories(opts);
+            res.status(200).json(data);
         } catch (error) {
-            console.error('Error parsing JSON:', error);
-            res.status(500).json({ error: 'Invalid JSON response from Aylien API' });
+            console.error(error);
+            res.status(500).json({ error: 'An error occurred while fetching news' });
         }
-
-    } catch (error) {
-        console.error('Error fetching news:', error);
-        res.status(500).json({ error: 'Failed to fetch news stories' });
+    } else {
+        res.setHeader('Allow', ['GET']);
+        res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 }
