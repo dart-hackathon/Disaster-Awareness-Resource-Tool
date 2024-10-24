@@ -1,25 +1,60 @@
-// news.js
+// Aylien API credentials
+const username = "513914@gr.balbharati.org"; // Replace with your actual Aylien username
+const password = "DART@12345"; // Replace with your actual Aylien password
+const appId = "071bb78f"; // Your Aylien App ID
 
-// Your API key from NewsAPI
-const API_KEY = 'ff989840ec55400fa35db84c645ee777';  // Replace with actual key
-
-// Fetch disaster news from NewsAPI
-async function fetchNews() {
-    const url = `https://newsdata.io/api/1/news?apikey=pub_5695608439e5f2b46d80ceb59517e6761da7a&q=disaster%20&country=in&language=en`;
+// Get OAuth token
+async function getToken() {
     try {
-        const response = await fetch(url);
-        console.log("Response successful");
-        const display = await response.json();
+        const response = await fetch("https://api.aylien.com/v1/oauth/token", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Authorization": "Basic " + btoa(`${username}:${password}`),
+            },
+            body: new URLSearchParams({
+                grant_type: "client_credentials"
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch token');
+        }
+        
+        const data = await response.json();
+        return data.access_token;
+    } catch (err) {
+        console.error("Error fetching token: ", err);
+    }
+}
+
+// Fetch disaster news from Aylien News API
+async function fetchNews() {
+    const token = await getToken(); // Get OAuth token
+    if (!token) {
+        displayNews("Error retrieving token");
+        return;
+    }
+
+    const url = 'https://api.aylien.com/v6/news/stories?categories.id=ay.lifesoc.recontr,ay.lifesoc.fire,ay.lifesoc.evacuate,ay.lifesoc.disaster&language=en&text=disaster&published_at.start=NOW-7DAYS/DAY';
+    const headers = {
+        "Authorization": `Bearer ${token}`,
+        "X-AYLIEN-NewsAPI-Application-ID": appId,
+        "X-AYLIEN-NewsAPI-Application-Key": password
+    };
+
+    try {
+        const response = await fetch(url, { headers });
+        const data = await response.json();
 
         if (response.ok) {
-            console.log(display);
-            displayNews(display.results);
+            displayNews(data.stories);  // Pass the fetched news stories to the display function
         } else {
             displayNews("Error in response");
         }
     } catch (err) {
-        displayNews("Error in display, err");
-        console.error("Error in fetch: ", err);
+        console.error("Error fetching news: ", err);
+        displayNews("Error fetching news");
     }
 }
 
@@ -33,19 +68,19 @@ function displayNews(articles) {
             const newsItem = document.createElement('div');
             newsItem.classList.add('news-item');
 
-            const imageUrl = article.image_url || ''; // Use empty string for missing images
+            const imageUrl = article.media.length > 0 ? article.media[0].url : ''; // Use Aylien media URL if available
 
             newsItem.innerHTML = `
                 <div class="news-image ${imageUrl ? '' : 'fallback'}">
                     ${imageUrl ? `<img src="${imageUrl}" alt="News Image">` : `<i class="fas fa-newspaper"></i>`}
                 </div>
                 <h4>${article.title}</h4>
-                <p>${article.description || 'No description available'}</p>
-                <small class="date">${new Date(article.pubDate).toLocaleDateString()}</small>
-                <a class="read-more" href="${article.link}" target="_blank">Read More</a>
+                <p>${article.summary || 'No summary available'}</p>
+                <small class="date">${new Date(article.published_at).toLocaleDateString()}</small>
+                <a class="read-more" href="${article.links.permalink}" target="_blank">Read More</a>
             `;
 
-            // If the image fails to load, show fallback
+            // Fallback if image doesn't load
             const img = newsItem.querySelector('img');
             if (img) {
                 img.onerror = function() {
