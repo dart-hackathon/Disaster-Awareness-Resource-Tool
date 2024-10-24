@@ -293,6 +293,20 @@ a:hover {
   }
 }
 
+.navbar.light-mode {
+  background: linear-gradient(90deg, #007BFF, #00A6FF) !important;
+  color: white !important;
+}
+
+.navbar.light-mode h1,
+.navbar.light-mode ul li a {
+  color: white !important;
+}
+
+.navbar.light-mode ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
 /* Animations */
 @keyframes fadeInDown {
   from {
@@ -315,12 +329,6 @@ a:hover {
     transform: translateY(0);
   }
 }
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #121212; /* Dark theme background */
-    color: #e0e0e0; /* Dark theme text color */
-  }
-
   .navbar {
     background: linear-gradient(90deg, #1f1f1f, #2a2a2a); /* Dark navbar */
   }

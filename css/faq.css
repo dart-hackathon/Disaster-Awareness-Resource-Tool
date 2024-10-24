@@ -66,6 +66,20 @@ h2 {
     animation: fadeIn 1.5s ease-out; /* Text fades in with delay */
 }
 
+.navbar.light-mode {
+    background: linear-gradient(90deg, #007BFF, #00A6FF) !important;
+    color: white !important;
+}
+
+.navbar.light-mode h1,
+.navbar.light-mode ul li a {
+    color: white !important;
+}
+
+.navbar.light-mode ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
 /* Responsive Styling */
 @media (max-width: 768px) {
     .faq-grid {

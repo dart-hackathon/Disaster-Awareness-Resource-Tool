@@ -23,6 +23,14 @@
         </div>
     </nav>
 
+    <div id="loading-popup" class="popup">
+        <p>Please wait, Sending.....</p>
+    </div>
+    <div id="success-popup" class="popup">
+        <p>Message sent successfully!</p>
+        <p>Thank You for Contacting Us!</p>
+    </div>
+
     <section id="contact" class="section contact-section">
         <div class="container">
             <h2>Contact Us</h2>
@@ -58,29 +66,45 @@
     </footer>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init('oZV7Qtubfwge3XVhA');
-        })();
+<script type="text/javascript">
+    (function() {
+        emailjs.init('oZV7Qtubfwge3XVhA');
+    })();
 
-        window.onload = function() {
-            document.getElementById('contact-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                this.contact_number.value = Math.random() * 100000 | 0;
-                
-                emailjs.sendForm('service_86at31g', 'template_6shahsc', this)
-                    .then(function() {
-                        console.log('SUCCESS!');
-                        alert('Message sent successfully!');
-                        document.getElementById('contact-form').reset();
-                    }, function(error) {
-                        console.log('FAILED...', error);
-                        alert('Failed to send message. Please try again.');
-                    });
-            });
-        }
-    </script>
+    window.onload = function() {
+        const form = document.getElementById('contact-form');
+        const loadingPopup = document.getElementById('loading-popup');
+        const successPopup = document.getElementById('success-popup');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            this.contact_number.value = Math.random() * 100000 | 0;
+            
+            // Show loading popup
+            loadingPopup.style.display = 'block';
+            
+            emailjs.sendForm('service_86at31g', 'template_6shahsc', this)
+                .then(function() {
+                    console.log('SUCCESS!');
+                    // Hide loading popup
+                    loadingPopup.style.display = 'none';
+                    // Show success popup
+                    successPopup.style.display = 'block';
+                    // Hide success popup after 3 seconds
+                    setTimeout(() => {
+                        successPopup.style.display = 'none';
+                    }, 3000);
+                    form.reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    // Hide loading popup
+                    loadingPopup.style.display = 'none';
+                    alert('Failed to send message. Please try again.');
+                });
+        });
+    }
+</script>
 
     <script>
         const hamburger = document.querySelector('.hamburger');
