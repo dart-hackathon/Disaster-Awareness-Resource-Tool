@@ -470,7 +470,7 @@
 <body>
     <nav class="navbar light-mode">
         <div class="container">
-            <a href="index.html"><h1>DART</h1></a>
+            <a href="/index.html"><h1>DART</h1></a>
            <!----<div class="hamburger">&#9776;</div>--->
             <ul>
                 <li style="--i:1"><a href="/index.html">Home</a></li>
@@ -588,9 +588,13 @@
             <button onclick="generateCertificate()">Generate Certificate</button>
         </div>
 
-        <button id="certificate-btn" onclick="showNameInput()" style="display: none;">Download Certificate</button>
-        <button id="go-back-btn" onclick="goBack()" style="display: none;">Go Back</button>
-    </div>
+        <button onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+
+        <div id="name-input">
+            <input type="text" id="user-name" placeholder="Enter your name for the certificate">
+            <button onclick="generateCertificate()">Generate Certificate</button>
+        </div>
 
     <!-- Success Modal -->
     <div id="quizModal" class="modal">
@@ -614,10 +618,7 @@
 
     <div id="nextCourseModal" class="modal" style="display: none;">
         <div class="modal-content">
-            <h2>Congratulations!</h2>
-            <p>You have completed Course 2. Would you like to proceed to Course 3?</p>
-            <button onclick="goToThirdCourse()">Yes, proceed to Course 3</button>
-            <button onclick="closeNextCourseModal()">No, thanks</button>
+            
         </div>
     </div>
 

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Observe all emergency cards for scroll animations
     document.querySelectorAll('.emergency-card').forEach(card => {
- observer.observe(card);
+        observer.observe(card);
     });
 
     // Hover effect for steps

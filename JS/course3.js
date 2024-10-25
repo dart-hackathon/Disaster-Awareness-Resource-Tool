@@ -179,26 +179,85 @@ function generateCertificate() {
         doc.setTextColor(0, 0, 0);
         doc.text(userName, 148.5, 105, { align: 'center' }); // Adjust coordinates as needed
 
-                // Save the PDF
-                doc.save('Disaster Management: Flood Certificate.pdf');
+        // Save the PDF
+        doc.save('Disaster Management: Earthquake Certificate.pdf');
 
-                // Hide name input after generating certificate
-                nameInputDiv.style.display = 'none';
-        
-                // Show custom modal
-                setTimeout(() => {
-                    document.getElementById('nextCourseModal').style.display = 'block';
-                }, 2000);
-            };
-        }
-        
-        function goToFourthCourse() {
-            window .location.href = 'course4.html';
-        }
-        
-        function closeNextCourseModal() {
-            document.getElementById('nextCourseModal').style.display = 'none';
-        }
+        // Hide name input after generating certificate
+        nameInputDiv.style.display = 'none';
+
+        // Mark this course as completed
+        localStorage.setItem('course1Completed', 'true');
+
+        // Show custom modal
+        setTimeout(() => {
+            showNextCourseModal();
+        }, 2000);
+    };
+}
+
+function showNextCourseModal() {
+    const nextCourseModal = document.getElementById('nextCourseModal');
+    const modalContent = nextCourseModal.querySelector('.modal-content');
+    
+    // Clear previous content
+    modalContent.innerHTML = '';
+
+    const completedCourses = getCompletedCourses();
+    const nextCourse = getNextAvailableCourse(completedCourses);
+
+    if (nextCourse) {
+        modalContent.innerHTML = `
+            <h2>Congratulations!</h2>
+            <p>You have completed this course. Would you like to proceed to ${nextCourse}?</p>
+            <button onclick="goToNextCourse('${nextCourse}')">Yes, proceed to ${nextCourse}</button>
+            <button onclick="goHome()">No, go to home</button>
+        `;
+    } else {
+        modalContent.innerHTML = `
+            <h2>Congratulations!</h2>
+            <p>You have completed all available courses!</p>
+            <button onclick="goHome()">Go to home</button>
+        `;
+    }
+
+    nextCourseModal.style.display = 'block';
+}
+
+function getCompletedCourses() {
+    const completedCourses = [];
+    if (localStorage.getItem('course1Completed') === 'true') completedCourses.push('Course 1');
+    if (localStorage.getItem('course2Completed') === 'true') completedCourses.push('Course 2');
+    if (localStorage.getItem('course3Completed') === 'true') completedCourses.push('Course 3');
+    if (localStorage.getItem('course4Completed') === 'true') completedCourses.push('Course 4');
+    return completedCourses;
+}
+
+function getNextAvailableCourse(completedCourses) {
+    const allCourses = ['Course 1', 'Course 2', 'Course 3', 'Course 4'];
+    return allCourses.find(course => !completedCourses.includes(course));
+}
+
+function goToNextCourse(course) {
+    switch(course) {
+        case 'Course 2':
+            window.location.href = '/courses/course2.html';
+            break;
+        case 'Course 3':
+            window.location.href = '/courses/course3.html';
+            break;
+        case 'Course 4':
+            window.location.href = '/courses/course4.html';
+            break;
+    }
+}
+
+function goHome() {
+    window.location.href = '/index.html';
+}
+
+function closeNextCourseModal() {
+    document.getElementById('nextCourseModal').style.display = 'none';
+}
 
 function closeModal2() {
     quizModal2.style.display = 'none';
