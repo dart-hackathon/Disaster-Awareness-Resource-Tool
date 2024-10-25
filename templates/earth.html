@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CesiumJS 3D Earth Map</title>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.104/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.104/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <style>
+        @import url('https://cesium.com/downloads/cesiumjs/releases/1.104/Build/Cesium/Widgets/widgets.css');
+        html, body, #cesiumContainer {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+    <script>
+        Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3ZmEyOGRjOS01MzYyLTQ1MmUtODY1NS00MDhiYjQ0ZDQwODMiLCJpZCI6MjUwNjQwLCJpYXQiOjE3Mjk4MzAzNDF9.Vt9Fw8yrQ0mYHzTcHywbyn76QoQdazZ8CzTfL3VrwnA';
+
+        var viewer = new Cesium.Viewer('cesiumContainer', {
+            imageryProvider: Cesium.createWorldImagery(),
+            baseLayerPicker: false
+        });
+
+        // Fetch the points data from the Flask endpoint
+        fetch('/points')
+            .then(response => {
+                console.log("Fetching points data");
+                return response.json();
+            })
+            .then(data => {
+                console.log("Data fetched:", data);
+                data.forEach(item => {
+                    console.log("Adding point:", item);
+                    viewer.entities.add({
+                        position: Cesium.Cartesian3.fromDegrees(item.longitude, item.latitude),
+                        point: { pixelSize: 10, color: Cesium.Color.RED }
+                    });
+
+
+
+                });
+
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+            });
+    </script>
+</body>
+</html>
