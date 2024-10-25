@@ -50,3 +50,10 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(all_news).encode())
         return
+
+def do_GET(self):
+    self.send_response(200)
+    self.send_header('Content-type', 'application/json')
+    self.send_header('Access-Control-Allow-Origin', '*')  # Be more specific in production
+    self.end_headers()
+    # ... rest of the function

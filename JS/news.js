@@ -80,3 +80,15 @@ function filterArticles() {
 
 // Fetch articles when the page loads
 document.addEventListener('DOMContentLoaded', fetchNewsArticles);
+
+console.log('news.js loaded');
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM content loaded');
+  fetchNewsArticles().catch(error => console.error('Error fetching news:', error));
+});
+
+function filterArticles() {
+  console.log('Filtering articles');
+  // ... rest of the function
+}
