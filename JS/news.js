@@ -1,17 +1,10 @@
-// Your API key for NewsData.io
-const API_KEY = 'pub_5695608439e5f2b46d80ceb59517e6761da7a';
-
 // Fetch disaster-related articles from NewsData.io
 async function fetchNewsArticles() {
-    const query = 'tornado OR earthquake OR cyclone OR landslide OR fire OR flood OR natural disaster OR disaster';
-    const url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&q=${encodeURIComponent(query)}&country=in&language=en`;
-
     try {
-        const response = await fetch(url);
-
+        const response = await fetch('/api/disaster_news');
         if (response.ok) {
-            const data = await response.json();
-            displayNewsArticles(data.results);  // Use the correct property from the response
+            const articles = await response.json();
+            displayNewsArticles(articles);
         } else {
             console.error('Failed to fetch articles:', response.status);
         }
