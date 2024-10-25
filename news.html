@@ -14,7 +14,6 @@
     <nav class="navbar light-mode">
         <div class="container">
             <a href="index.html"><h1>DART</h1></a>
-           <!----<div class="hamburger">&#9776;</div>--->
             <ul>
                 <li style="--i:1"><a href="index.html">Home</a></li>
                 <li style="--i:2"><a href="disasters.html">Disasters</a></li>
@@ -40,6 +39,13 @@
         <section id="news-section" class="section news-section">
             <div class="container">
                 <h3>Latest News</h3>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search articles..." oninput="filterArticles()">
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+
                 <div id="news-container" class="news-grid">
                     <!-- News articles will be injected here -->
                 </div>
